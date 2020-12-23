@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Let & Const</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        <link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+    </head>
+    <body class="vscode-light">
+        <h4 id="let--const">Let &amp; Const</h4>
+<ul>
+<li>
+<p>作用域 基础语法</p>
+<ul>
+<li>全局作用域 window.$</li>
+<li>函数作用域 function fn(){}</li>
+<li>块级作用域 let 块级作用域不会挂载到window对象，不能作属性直接使用</li>
+<li>动态作用域 bind</li>
+</ul>
+</li>
+</ul>
+<h4 id="for%e8%99%9a%e5%b9%bb%e6%94%af%e6%8c%81break%e5%92%8ccontinue-arrevery%e9%9c%80%e8%a6%81%e8%bf%94%e5%9b%9etrue%e6%89%8d%e4%bc%9a%e7%bb%a7%e7%bb%ad%e6%89%a7%e8%a1%8c">for虚幻支持break和continue arr.every需要返回true才会继续执行</h4>
+<h4 id="%e5%bf%ab%e9%80%9f%e7%94%9f%e6%88%90%e6%95%b0%e7%bb%84">快速生成数组</h4>
+<ul>
+<li><strong>Array.from 类数组转为数组</strong></li>
+</ul>
+<ul>
+<li><strong>Array.from(</strong><code>arrayLike|iterable, ?mapFn, ?thisArg</code><strong>)</strong>;</li>
+<li><code>({0: 'a', 1: 'b', 2: '3', length: 4} 这个就是类数组)</code></li>
+<li><code>Array.from({length: 5}, () =&gt; 1); 返回 =&gt; [1, 1, 1, 1, 1]</code></li>
+</ul>
+<ul>
+<li>
+<p>Array.of() 快速生成一个数组</p>
+<ul>
+<li><code>Array.of(1, 2, 3, 4, 5, 6, 7); 返回 =&gt;  [1, 2, 3, 4, 5, 6, 7]</code></li>
+</ul>
+</li>
+<li>
+<p>(<strong>修改原数组</strong>) Array.fill(value, start|0, end|array.length) 填充数组的默认值其实也可以修改</p>
+<ul>
+<li><code>Array(5).fill(1); ; 返回 =&gt; [1, 1, 1, 1, 1]</code></li>
+<li><code>Array(3).fill(); ; 返回 =&gt; [undefined, undefined, undefined]</code></li>
+<li><code>let arr = [1, 2, 3, 4, 5]; arr.fill(6, 2) ; 返回 =&gt; [1, 2, 6, 6, 6]</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="%e5%bf%ab%e9%80%9f%e6%9f%a5%e6%89%be%e6%95%b0%e7%bb%84%e4%b8%ad%e6%98%af%e5%90%a6%e5%8c%85%e5%90%ab%e6%9f%90%e4%b8%aa%e5%80%bc">快速查找数组中是否包含某个值</h4>
+<ul>
+<li>
+<p><strong>Array.filter(item =&gt; item % 2 === 0)</strong> 找所有满足的值 直到结束 如果数据量特别的大性能就比较差因为会遍历所有的数组对象</p>
+<ul>
+<li><code>let arr = [1, 2, 3, 4, 5]; arr.filter(item =&gt; item % 2 === 0); 返回 =&gt; [2, 4]</code></li>
+<li><code>let arr = [1, 2, 3, 4, 5]; arr.filter(item =&gt; item % 2 === 3); 返回 =&gt; []</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Array.find(item =&gt; item === 2)</strong> 找到满足的第一个值 即 停止</p>
+<ul>
+<li><code>let arr = [1, 2, 3, 4, 5]; arr.find(item =&gt; item === 3); 返回 =&gt; 3(数字3，即数组内容而非索引)</code></li>
+<li><code>let arr = [1, 2, 3, 4, 5]; arr.find(item =&gt; item === 6); 返回 =&gt; undefined</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Array.findIndex(item =&gt; item === 2)</strong> 找到满足的第一个值的索引下标 即 停止</p>
+<ul>
+<li><code>let arr = [1, 2, 3, 4, 5]; arr.findIndex(item =&gt; item%3 === 0); 返回 =&gt; 2</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="%e5%ae%9a%e4%b9%89%e4%b8%80%e4%b8%aa%e7%b1%bbclass">定义一个类Class</h4>
+<ul>
+<li>es2015写法</li>
+</ul>
+<pre><code class="language-javascript"><div>  <span class="hljs-comment">// 这样写法有问题 即 每个实例对象都会挂载一个eat方法导致实例化对象过于庞大</span>
+  <span class="hljs-keyword">var</span> Animal = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">type</span>) </span>{
+      <span class="hljs-keyword">this</span>.type = type;
+      <span class="hljs-keyword">this</span>.eat = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+          <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'eat fn'</span>)
+      }
+  }
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">new</span> Animal(<span class="hljs-string">'dog'</span>));
+  <span class="hljs-comment">//返回 =&gt; {</span>
+  <span class="hljs-comment">//     type: 'dog',</span>
+  <span class="hljs-comment">//     eat: fn()</span>
+  <span class="hljs-comment">// };</span>
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">new</span> Animal(<span class="hljs-string">'cat'</span>));
+  <span class="hljs-comment">//返回 =&gt; {</span>
+  <span class="hljs-comment">//    type: 'cat',</span>
+  <span class="hljs-comment">//    eat: fn()</span>
+  <span class="hljs-comment">//};</span>
+
+  <span class="hljs-comment">// 正确写法</span>
+  <span class="hljs-keyword">var</span> Animal = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">type</span>) </span>{
+      <span class="hljs-keyword">this</span>.type = type;
+  }
+
+  Animal.prototype.eat = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+      <span class="hljs-comment">// 这里可以理解为 挂载方法在树根上 而非挂载在树杈上</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'eat'</span>);
+  }
+
+  <span class="hljs-comment">// 修改eat方法</span>
+  dog.constructor.prototype.eat = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'change public eat'</span>)
+  }
+</div></code></pre>
+<ul>
+<li>es6+写法</li>
+</ul>
+<pre><code class="language-javascript"><div>  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Animal</span> </span>{
+      <span class="hljs-keyword">constructor</span>(type) {
+          <span class="hljs-keyword">this</span>.type = type
+      }
+
+      eat() {
+          <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'eat'</span>);
+      }
+  }
+
+  <span class="hljs-keyword">let</span> dog = <span class="hljs-keyword">new</span> Animal(<span class="hljs-string">'dog'</span>);
+  <span class="hljs-built_in">console</span>.log(dog.eat);
+
+<span class="hljs-string">`console.log(typeof(Animal)) =&gt; function 实际上Class就是es2015写法的语法糖 实际就是构建了一个function 并且把方法挂载到了树根 prototype上面`</span> 
+
+  <span class="hljs-comment">// 保护变量 实际上是闭包原理 外界传一个_age 然后内部拿到赋值age但是实际上外部实例化对象是拿不到_age的值 从而变为一个私有属性</span>
+  <span class="hljs-keyword">let</span> _age = <span class="hljs-number">18</span>; <span class="hljs-comment">// 解析getter setter</span>
+  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Animal</span> </span>{
+      <span class="hljs-keyword">constructor</span>(type) {
+          <span class="hljs-keyword">this</span>.type = type
+      }
+
+      <span class="hljs-comment">// 这里要强调一下 如果一个看似函数的前面有getter setter 那么这个属性会被放到类的最顶层(也就是constructor外面，constructor的上面) 并且会变为一个属性</span>
+      <span class="hljs-keyword">get</span> age() { <span class="hljs-comment">// 如果只有一个get那么就是只读属性</span>
+          <span class="hljs-keyword">return</span> _age
+      }
+
+      <span class="hljs-keyword">set</span> age(val) {
+          _age = val
+      }
+
+      eat() {
+          <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'eat'</span>);
+      }
+  }
+
+  <span class="hljs-keyword">let</span> dog = <span class="hljs-keyword">new</span> Animal(<span class="hljs-string">'dog'</span>);
+  <span class="hljs-built_in">console</span>.log(dog.age);
+  dog.age = <span class="hljs-number">5</span>;
+  <span class="hljs-built_in">console</span>.log(dog.age);
+</div></code></pre>
+<ul>
+<li>
+<p>类的静态方法</p>
+<ul>
+<li>es2015写法</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-javascript"><div>  <span class="hljs-keyword">let</span> Animal = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">type</span>) </span>{
+      <span class="hljs-keyword">this</span>.type = type
+  }
+
+  Animal.prototype.eat = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+      Animal.run(); <span class="hljs-comment">// 如果改为this.run()这个地方会报错 因为静态方法在实例对象上面是找不到的</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'eat'</span>)
+  }
+
+  Animal.run = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'running'</span>);
+  }
+
+  <span class="hljs-keyword">let</span> dog = <span class="hljs-keyword">new</span> Animal(<span class="hljs-string">'dog'</span>);
+  dog.eat();
+  dog.run(); <span class="hljs-comment">// 这个地方会报错 因为静态方法在实例对象上面是找不到的</span>
+</div></code></pre>
+<ul>
+<li>es6+写法</li>
+</ul>
+<pre><code class="language-javascript"><div>  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Animal</span> </span>{
+
+      <span class="hljs-keyword">constructor</span>(type) {
+          <span class="hljs-keyword">this</span>.type = type
+      }
+
+      eat() {
+          Animal.run();
+          <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'eat'</span>);
+      }
+
+      <span class="hljs-keyword">static</span> run() {
+          <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'running'</span>);
+      }
+  }
+
+  <span class="hljs-keyword">let</span> dog = <span class="hljs-keyword">new</span> Animal(<span class="hljs-string">'dog'</span>);
+  dog.eat();
+  dog.run(); <span class="hljs-comment">// 这个地方会报错 因为静态方法在实例对象上面是找不到的</span>
+</div></code></pre>
+<ul>
+<li><strong>什么时候使用类的静态方法什么时候用实例对象方法呢？</strong>
+<ul>
+<li>当方法<strong>依赖</strong>于类的属性或方法就必须定义为类的实例对象方法</li>
+<li>当方法<strong>不依赖</strong>于类的属性或方法就必须定义为类的静态方法</li>
+<li><strong>实际上就是类的静态方法获取不到当前的实例对象</strong></li>
+</ul>
+</li>
+</ul>
+
+    </body>
+    </html>
